@@ -11,7 +11,7 @@ services:
           - CORES_DIR=/cores
         volumes:
           - .:/service_template:rw
-          - ./third_party/userver/tools/docker:/tools:ro
+          - ./third_party/userver/scripts/docker/:/tools:ro
         ports:
           - 8080:8080
         working_dir: /service_template
