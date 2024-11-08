@@ -4,15 +4,10 @@ project(service_template CXX)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(DownloadUserver)
 
-# Adding userver dependency
 find_package(userver COMPONENTS core postgresql QUIET)
-if(NOT userver_FOUND)  # Fallback to subdirectory usage
-    download_userver(
-      # Compatibility mode: some systems don't support these features
-      FEATURES_OFF
-        CRYPTOPP_BLAKE2
-	GRPC_CHANNELZ
-    )
+if(NOT userver_FOUND)
+    # download_userver() tries TRY_DIR first, fallbacks to downloading userver from github
+    download_userver(TRY_DIR third_party/userver)
 endif()
 
 userver_setup_environment()
